@@ -1,0 +1,31 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title >{{user.nome}}</ion-title>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+	<ion-card>
+		<!-- LOGO -->
+		<img width="80" height="180" src="https://goo.gl/kZP7Jh">
+
+		<!-- Nome/Endereco-->
+		<ion-item *ngFor="let c of lista | async">
+			<ion-icon name="md-restaurant" item-start large></ion-icon>
+			<h2 *ngIf="c.nome != undefined">{{c.nome}}></h2>
+			<p *ngIf="c.endereco != undefined">{{c.endereco}}</p>
+      <p *ngIf="c.telefone != undefined">{{c.telefone}}</p>
+		</ion-item>
+		<!--PONTUACAO-->
+		<ion-card>
+			<ion-item>
+				<ion-icon name="pricetags" item-start large></ion-icon>
+				30 pontos
+			</ion-item>
+		</ion-card>
+	</ion-card>
+</ion-content>

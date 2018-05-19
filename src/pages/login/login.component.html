@@ -1,0 +1,22 @@
+<ion-content>
+<form #f="ngForm" (ngSubmit)="entrar(f)">
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating> Email </ion-label>
+      <ion-input type="email" name="email" ngModel> </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating> Senha </ion-label>
+      <ion-input type="password" name="senha" ngModel> </ion-input>
+    </ion-item>
+
+    <div padding>
+      <button ion-button block>Entrar</button>
+      <button ion-button outline block type="button" (click)="registrarUser()">Registre-se usuário</button>
+      <button ion-button outline block type="button" (click)="registrarEmp()">Registre-se empresa</button>
+    </div>
+  </ion-list>
+</form>
+</ion-content>
