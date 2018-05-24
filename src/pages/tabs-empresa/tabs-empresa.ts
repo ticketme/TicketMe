@@ -1,4 +1,4 @@
-import { CriarQrCode } from './../criar-qrcode/criar-qrdcode';
+import { CriarPromo } from './../criar-promo/criar-promo';
 import { Component } from '@angular/core';
 import { Configuracoes } from '../configuracoes/configuracoes.component';
 import { InicioEmpresaComponent } from '../inicio-empresa/inicio-empresa.component';
@@ -12,7 +12,7 @@ import { InicioEmpresaComponent } from '../inicio-empresa/inicio-empresa.compone
 export class TabsEmpresaPage {
 
   tab1Root = InicioEmpresaComponent;
-  tab2Root = CriarQrCode;
+  tab2Root = CriarPromo;
   tab3Root = Configuracoes;
 
 

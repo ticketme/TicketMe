@@ -21,7 +21,7 @@ import { MeusDados } from '../pages/meus-dados/meus-dados.component';
 import { InicioEmpresaComponent } from '../pages/inicio-empresa/inicio-empresa.component';
 
 
-import { CriarQrCode } from '../pages/criar-qrcode/criar-qrdcode';
+import { CriarPromo } from '../pages/criar-promo/criar-promo';
 import { LerQrCode } from '../pages/ler-qrcode/ler-qrcode';
 
 // QRcode
@@ -51,7 +51,7 @@ const config = {
     TabsEmpresaPage,
     Configuracoes,
     MeusDados,
-    CriarQrCode,
+    CriarPromo,
     LerQrCode
     
   ],
@@ -75,7 +75,7 @@ const config = {
     TabsEmpresaPage,
     Configuracoes,
     MeusDados,
-    CriarQrCode,
+    CriarPromo,
     LerQrCode
     
   ],

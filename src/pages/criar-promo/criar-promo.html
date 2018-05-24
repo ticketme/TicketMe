@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Criar QR Code
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <form #formcard="ngForm" (ngSubmit)="registrarPromo(formcard)">
+        <ion-list>
+
+            <ion-item>
+                <ion-label floating> Nome da promoção </ion-label>
+                <ion-input type="text" name="nome"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating> Pontos necessário: </ion-label>
+                <ion-input type="number" name="pontos"></ion-input>
+            </ion-item>
+
+            <ion-item padding>
+                <ion-label floating>Data de finalização:</ion-label>
+                <ion-input type="date" name="dateEndPromo"></ion-input>
+              </ion-item>
+
+            <div padding>
+                <button ion-button full icon-left>
+                    <ion-icon name="pricetag"></ion-icon> Criar promoção</button>
+            </div>
+        </ion-list>
+    </form>
+</ion-content>

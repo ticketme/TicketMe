@@ -8,20 +8,11 @@ import { Observable } from 'rxjs/Observable';
 import { CardPromo } from '../../models/cardPromo';
 
 @Component({
-  templateUrl: './criar-qrcode.html'
+  templateUrl: './criar-promo.html'
 })
-export class CriarQrCode {
+export class CriarPromo {
   public lista: Observable<CardPromo[]>;
   public cardPromo = {}
-  
-  qrNome = null;
-  qrPonto = null;
-  valueQr:any;
-
-  conteudoCard:any={
-    nome:null,
-    pontos: null
-  };
   
   constructor(private navCtrl: NavController,
               private db: AngularFirestore,
@@ -31,31 +22,24 @@ export class CriarQrCode {
       let uid = afAuth.auth.currentUser.uid;
       this.lista = db.collection<CardPromo>('listCardPromo', ref => ref.where('uid','==',uid)).valueChanges();
             
-      db.collection('cartaoPromocao').doc(uid).valueChanges().subscribe((cardPromo)=> {
+      db.collection('promocoes').doc(uid).valueChanges().subscribe((cardPromo)=> {
         this.cardPromo = cardPromo;
       })      
             
 }
 
-  public createCode() {
-    this.conteudoCard.nome = this.qrNome;
-    this.conteudoCard.pontos = this.qrPonto;
-    this.valueQr = JSON.stringify(this.conteudoCard);
-    
-    
-  }
 
-
-  public registrarCard(form: NgForm): void{
+  public registrarPromo(form: NgForm): void{
 
    let nome: string = form.value.nome;
    let pontos: string = form.value.pontos;
+   let dateEndPromo: Date = form.value.dateEndPromo;
 
-
-      this.db.collection("cartaoPromocao/").doc("cartaoPromocao")
+      this.db.collection("promocoes/").doc("uid")
        .set({
          nome: nome,
-         pontos:pontos
+         pontos:pontos,
+         dateEndPromo:dateEndPromo
        })
        .catch((error)=>{
          this.alertCtrl.create({
