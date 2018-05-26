@@ -1,13 +1,21 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title >{{empresa.nome}}</ion-title>
+		<ion-title>{{empresa.nome}}</ion-title>
 		<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+			<ion-icon name="menu"></ion-icon>
+		</button>
 	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+	<ion-card *ngFor="let CardPromo of listaCard | async">
+		<ion-item>
+			<h2>Nome da promoção: {{CardPromo.nome}}</h2>
+			<p>Pontos necessários: {{CardPromo.pontos}}</p>
+			<p>Fim da promoção: {{CardPromo.dataFimPromo}}</p>
+			<button ion-button icon-left><ion-icon name="barcode"></ion-icon> Criar QrCode</button>
+			<button ion-button icon-left (click)="deletePromo(uid)"><ion-icon name="trash"></ion-icon> Excluir promoção</button>		
+		</ion-item>
+	</ion-card>
 
 </ion-content>

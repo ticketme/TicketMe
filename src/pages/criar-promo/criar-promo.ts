@@ -6,6 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { CardPromo } from '../../models/cardPromo';
+import { InicioEmpresaComponent } from '../inicio-empresa/inicio-empresa.component';
 
 @Component({
   templateUrl: './criar-promo.html'
@@ -13,7 +14,7 @@ import { CardPromo } from '../../models/cardPromo';
 export class CriarPromo {
   public lista: Observable<CardPromo[]>;
   public cardPromo = {}
-  
+  public dataFimPromo:any;
   constructor(private navCtrl: NavController,
               private db: AngularFirestore,
               private afAuth: AngularFireAuth,
@@ -31,15 +32,19 @@ export class CriarPromo {
 
   public registrarPromo(form: NgForm): void{
 
-   let nome: string = form.value.nome;
+   let nomeCard: string = form.value.nomeCard;
    let pontos: string = form.value.pontos;
-   let dateEndPromo: Date = form.value.dateEndPromo;
+   let dataFimPromo: string = form.value.dataFimPromo;
+   let empresa: string = this.afAuth.auth.currentUser.uid;
 
-      this.db.collection("promocoes/").doc("uid")
-       .set({
-         nome: nome,
+      this.db.collection("promocoes").add({
+         nome: nomeCard,
          pontos:pontos,
-         dateEndPromo:dateEndPromo
+         dataFimPromo:dataFimPromo,
+         empresa: empresa
+       })
+       .then(ref =>{
+         this.db.collection("promocoes").doc(ref.id).update({id:ref.id})
        })
        .catch((error)=>{
          this.alertCtrl.create({
@@ -49,6 +54,7 @@ export class CriarPromo {
            
          }).present();
        })
+       this.navCtrl.push(InicioEmpresaComponent);
     }
 
 }

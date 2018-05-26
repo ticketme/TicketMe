@@ -1,32 +1,31 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Alert, AlertController, Card } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Usuario } from '../../models/usuario';
+import { CardPromo } from '../../models/cardPromo';
 
 
 @Component({
   templateUrl: './inicio-empresa.html',
 })
 export class InicioEmpresaComponent  {
+  
+  public listaCard: Observable<CardPromo[]>;
+  public empresa = {}
+  
+    constructor(public navCtrl: NavController,
+                public db : AngularFirestore,
+                public afAuth:AngularFireAuth,
+                public alertCtrl:AlertController ) { 
+  
+      let uid = afAuth.auth.currentUser.uid;
+      
+      db.collection('usuarios').doc(uid).valueChanges().subscribe((empresa)=> {this.empresa = empresa;});
+  
+      this.listaCard = db.collection<CardPromo>('promocoes', ref => ref.where('empresa','==',uid)).valueChanges();
+    }
 
-public lista: Observable<Usuario[]>;
-public empresa = {}
 
-  constructor(public navCtrl: NavController,
-              public db : AngularFirestore,
-              public afAuth:AngularFireAuth) { 
-
-    let uid = afAuth.auth.currentUser.uid;
-    
-    this.lista = db.collection<Usuario>('listCadEmpresa', ref => ref.where('uid','==',uid)).valueChanges();
-
-     db.collection('usuarios').doc(uid).valueChanges().subscribe((empresa)=> {
-       this.empresa = empresa;
-     })
-
-
-
-  }
 }
