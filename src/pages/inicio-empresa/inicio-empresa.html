@@ -10,11 +10,10 @@
 <ion-content padding>
 	<ion-card *ngFor="let CardPromo of listaCard | async">
 		<ion-item>
-			<h2>Nome da promoção: {{CardPromo.nome}}</h2>
+			<h2>{{CardPromo.nome}}</h2>
 			<p>Pontos necessários: {{CardPromo.pontos}}</p>
 			<p>Fim da promoção: {{CardPromo.dataFimPromo}}</p>
-			<button ion-button icon-left><ion-icon name="barcode"></ion-icon> Criar QrCode</button>
-			<button ion-button icon-left (click)="deletePromo(uid)"><ion-icon name="trash"></ion-icon> Excluir promoção</button>		
+			<button ion-button icon-left (click)="gerarQRCode(CardPromo.id)"><ion-icon name="barcode"></ion-icon> Gerar QrCode</button>
 		</ion-item>
 	</ion-card>
 

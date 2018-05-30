@@ -11,7 +11,7 @@ import { Usuario } from '../../models/usuario';
 })
 export class InicioUsuario {
 
-public lista: Observable<Usuario[]>;
+public lista: Observable<any[]>;
 public user = {}
  
 
@@ -26,9 +26,7 @@ public user = {}
      db.collection('usuarios').doc(uid).valueChanges().subscribe((user)=> {
        this.user= user;
      })
-
-
-
+     this.lista = db.collection('usuarios').doc(uid).collection("participacoes").valueChanges();
+  
   }
-
 }

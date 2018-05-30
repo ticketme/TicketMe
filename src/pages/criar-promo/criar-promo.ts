@@ -15,18 +15,22 @@ export class CriarPromo {
   public lista: Observable<CardPromo[]>;
   public cardPromo = {}
   public dataFimPromo:any;
+  public empresa:any = {};
   constructor(private navCtrl: NavController,
               private db: AngularFirestore,
               private afAuth: AngularFireAuth,
-              private alertCtrl: AlertController) { 
+              private alertCtrl: AlertController) {
 
       let uid = afAuth.auth.currentUser.uid;
+
+      db.collection('usuarios').doc(uid).valueChanges().subscribe((empresa) => { this.empresa = empresa; });
+
       this.lista = db.collection<CardPromo>('listCardPromo', ref => ref.where('uid','==',uid)).valueChanges();
-            
+
       db.collection('promocoes').doc(uid).valueChanges().subscribe((cardPromo)=> {
         this.cardPromo = cardPromo;
-      })      
-            
+      })
+
 }
 
 
@@ -39,9 +43,10 @@ export class CriarPromo {
 
       this.db.collection("promocoes").add({
          nome: nomeCard,
-         pontos:pontos,
+         pontos: parseInt(pontos),
          dataFimPromo:dataFimPromo,
-         empresa: empresa
+         empresa: empresa,
+         nomeEmpresa: this.empresa.nome
        })
        .then(ref =>{
          this.db.collection("promocoes").doc(ref.id).update({id:ref.id})
@@ -51,7 +56,7 @@ export class CriarPromo {
            title:"Erro no registro",
            subTitle: error.message,
            buttons: ["Ok"]
-           
+
          }).present();
        })
        this.navCtrl.push(InicioEmpresaComponent);

@@ -27,6 +27,7 @@ import { LerQrCode } from '../pages/ler-qrcode/ler-qrcode';
 // QRcode
 import { NgxQRCodeModule } from "ngx-qrcode2";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
+import { QrcodePage } from '../pages/qrcode/qrcode';
 
 
 
@@ -52,7 +53,8 @@ const config = {
     Configuracoes,
     MeusDados,
     CriarPromo,
-    LerQrCode
+    LerQrCode,
+    QrcodePage
     
   ],
   imports: [
@@ -76,7 +78,8 @@ const config = {
     Configuracoes,
     MeusDados,
     CriarPromo,
-    LerQrCode
+    LerQrCode,
+    QrcodePage
     
   ],
   providers: [
